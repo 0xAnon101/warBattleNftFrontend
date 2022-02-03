@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ethers } from "ethers";
-import dotenv from "dotenv";
 
+import SelectCharacter from "./Components/SelectCharacter";
 import GodOfWarNFT from "./utils/GodOfWarBattle.json";
 import "./styles/App.css";
-dotenv.config();
 
 // Constants
-const TWITTER_HANDLE = "anon101";
+const TWITTER_HANDLE = "";
+const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [wrongChain, setWrongChain] = useState({});
-  const sectionRef = useRef();
+  const [characterNFT, setCharacterNFT] = useState(null);
 
   const RINKEBY_CONTRACT_ADDRESS =
     process.env.REACT_APP_RINKEBY_CONTRACT_ADDRESS;
@@ -27,7 +27,7 @@ const App = () => {
       className="cta-button connect-wallet-button"
       onClick={connectWallet}
     >
-      Connect to Wallet
+      Connect Wallet To Get Started
     </button>
   );
 
@@ -53,7 +53,6 @@ const App = () => {
 
   // connects wallet on btn click
   const connectWallet = async () => {
-    alert("hi");
     try {
       const { ethereum } = window;
       if (!ethereum) {
@@ -61,6 +60,7 @@ const App = () => {
         return;
       }
       checkChain();
+      console.log("checking chain");
       if (!wrongChain.value) {
         const accounts = await ethereum.request({
           method: "eth_requestAccounts",
@@ -68,8 +68,7 @@ const App = () => {
 
         console.log("Connected with account: ", accounts[0]);
         setCurrentAccount(accounts[0]);
-        const { contractInstance } = getContractInstance(ethereum);
-        console.log("attacking boss: ", contractInstance.attackBoss());
+        const { contractInstance } = await getContractInstance(ethereum);
       }
     } catch (error) {
       console.log(error);
@@ -101,19 +100,33 @@ const App = () => {
     return { provider, signer, contractInstance };
   };
 
+  const renderContent = () => {
+    if (!currentAccount) {
+      return renderNotConnectedContainer();
+    } else if (currentAccount && !characterNFT) {
+      return <SelectCharacter setCharacterNFT={setCharacterNFT} />;
+    }
+  };
+
   return (
     <div className="App">
-      <div className="container" ref={sectionRef}>
-        <div className="content-container"></div>
+      <div className="container">
+        <div className="header-container">
+          <p className="header gradient-text">⚔️ Metaverse Slayer ⚔️</p>
+          <p className="sub-text">Team up to protect the Metaverse!</p>
+          {renderContent()}
+          <div className="accounts">
+            {wrongChain.value ? wrongChain.msg : currentAccount}
+          </div>
+        </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" />
-          {renderNotConnectedContainer()}
           <a
             className="footer-text"
-            // href={TWITTER_LINK}
+            href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built by @${TWITTER_HANDLE}`}</a>
+          >{`built with @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
