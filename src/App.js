@@ -107,7 +107,13 @@ const App = () => {
     if (!currentAccount) {
       return renderNotConnectedContainer();
     } else if (currentAccount && characterNFT) {
-      return <Arena characterNFT={characterNFT} />;
+      return (
+        <Arena
+          characterNFT={characterNFT}
+          setCharacterNFT={setCharacterNFT}
+          getContractInstance={getContractInstance}
+        />
+      );
     } else if (currentAccount && !characterNFT) {
       return (
         <SelectCharacter
