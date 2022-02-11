@@ -1,21 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
 import SelectCharacter from "./Components/SelectCharacter";
+import Arena from "./Components/Arena";
 import GodOfWarNFT from "./utils/GodOfWarBattle.json";
+import { RINKEBY_CONTRACT_ADDRESS } from "./constants";
 import "./styles/App.css";
 
 // Constants
-const TWITTER_HANDLE = "";
+const TWITTER_HANDLE = "ray_V101";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [wrongChain, setWrongChain] = useState({});
   const [characterNFT, setCharacterNFT] = useState(null);
-
-  const RINKEBY_CONTRACT_ADDRESS =
-    process.env.REACT_APP_RINKEBY_CONTRACT_ADDRESS;
 
   useEffect(() => {
     checkIfWalletIsConnected();
@@ -67,8 +66,7 @@ const App = () => {
         });
 
         console.log("Connected with account: ", accounts[0]);
-        setCurrentAccount(accounts[0]);
-        const { contractInstance } = await getContractInstance(ethereum);
+        setCurrentAccount(accounts[0]); // setting the current account
       }
     } catch (error) {
       console.log(error);
@@ -91,6 +89,7 @@ const App = () => {
   const getContractInstance = async (ethereum) => {
     const provider = await new ethers.providers.Web3Provider(ethereum);
     const signer = await provider.getSigner();
+    console.log(provider, signer);
     const contractInstance = new ethers.Contract(
       RINKEBY_CONTRACT_ADDRESS,
       GodOfWarNFT.abi,
@@ -100,11 +99,23 @@ const App = () => {
     return { provider, signer, contractInstance };
   };
 
+  const setUserCharacterNFT = (value) => {
+    setCharacterNFT(value);
+  };
+
   const renderContent = () => {
     if (!currentAccount) {
       return renderNotConnectedContainer();
+    } else if (currentAccount && characterNFT) {
+      return <Arena characterNFT={characterNFT} />;
     } else if (currentAccount && !characterNFT) {
-      return <SelectCharacter setCharacterNFT={setCharacterNFT} />;
+      return (
+        <SelectCharacter
+          currentAccount={currentAccount}
+          setCharacterNFT={setUserCharacterNFT}
+          getContractInstance={getContractInstance}
+        />
+      );
     }
   };
 
@@ -112,7 +123,7 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">⚔️ Metaverse Slayer ⚔️</p>
+          <p className="header gradient-text">🏹 Metaverse Slayer 🏹</p>
           <p className="sub-text">Team up to protect the Metaverse!</p>
           {renderContent()}
           <div className="accounts">
