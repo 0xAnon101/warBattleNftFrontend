@@ -15,7 +15,7 @@
 
 .header-container {
   padding-top: 30px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "The-Slug-and-Lion";
   font-weight: 300;
   position: relative;
 }
@@ -47,7 +47,7 @@
 }
 
 .gradient-text {
-  background: -webkit-linear-gradient(left, #60c657 30%, #35aee2 60%);
+  background: wheat;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

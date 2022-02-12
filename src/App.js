@@ -129,21 +129,19 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">🏹 Metaverse Slayer 🏹</p>
-          <p className="sub-text">Team up to protect the Metaverse!</p>
+          <p className="header gradient-text">🏹 PepeVerse Slayers 🏹</p>
           {renderContent()}
           <div className="accounts">
             {wrongChain.value ? wrongChain.msg : currentAccount}
           </div>
         </div>
         <div className="footer-container">
-          <img alt="Twitter Logo" className="twitter-logo" />
           <a
             className="footer-text"
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built with @${TWITTER_HANDLE}`}</a>
+          >{`Built by @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>

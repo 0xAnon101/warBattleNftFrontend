@@ -47,13 +47,7 @@ const SelectCharacter = ({
     async function getDefaultCharacters() {
       try {
         console.log("fetching default characters...");
-        console.log(
-          gameContract,
-          gameContract.getAllDefaultCharacters,
-          "====="
-        );
         const defaultCharacters = await gameContract.getAllDefaultCharacters();
-
         const chars = defaultCharacters.map((charData) =>
           transformCharacterData(charData)
         );
@@ -98,7 +92,9 @@ const SelectCharacter = ({
           type="button"
           className="character-mint-button"
           onClick={mintCharacterNFTAction(index)}
-        >{`Mint ${character.name}`}</button>
+        >
+          {<span>Mint</span>}
+        </button>
       </div>
     ));
 
