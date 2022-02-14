@@ -2,14 +2,21 @@
   display: flex;
   align-items: center;
   color: white;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  position: relative;
+  top: 50px;
+}
+
+.arena-container .info-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
 
 .arena-container .boss-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-bottom: 50px;
 }
 
 .boss-container .boss-content {
@@ -28,7 +35,8 @@
   );
   background-size: 600% 600%;
   animation: gradient-animation 8s ease infinite;
-  margin-bottom: 25px;
+  height: 420px;
+  width: 350px;
 }
 
 .boss-content h2 {
@@ -45,7 +53,10 @@
   width: 100%;
   height: 300px;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
+  position: relative;
+  right: 19px;
+  margin-bottom: 50px;
 }
 
 .image-content .health-bar {
@@ -86,22 +97,45 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
+  position: relative;
 }
 
 .players-container .player {
   display: flex;
   flex-direction: column;
-  max-height: 80%;
   padding: 10px;
   border-radius: 10px;
-  background-color: gray;
+  background-image: linear-gradient(
+    to right,
+    #5e5959 0%,
+    #444040 0%,
+    #5e5959 21%,
+    #525050 52%,
+    #363333 78%,
+    #060606 100%
+  );
+  background-size: 600% 600%;
+  animation: gradient-animation 8s ease infinite;
+}
+
+.player h2 {
+  margin: 0;
+  padding: 5px 0 10px 0;
 }
 
 .player .image-content img {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 300px;
   border-radius: 10px;
+  margin-bottom: 50px;
   object-fit: contain;
+}
+
+.players-container .stats {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  transform: translateX(60%) translateY(100%) rotate(90deg);
 }
 
 .players-container .active-players {
@@ -135,9 +169,16 @@
   border-radius: 8px;
 }
 
+.player-content {
+  width: 350px;
+  height: 420px;
+}
 .active-player-item .player-content {
   flex-direction: column;
   text-align: left;
+  height: 420px;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .attack-container {
@@ -236,4 +277,37 @@
   height: 90px;
   overflow: hidden;
   white-space: nowrap;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+  transition: 0.3s all ease;
+}
+a:hover {
+  color: #b15947;
+}
+a:focus {
+  text-decoration: none;
+}
+a:active {
+  color: #fff;
+}
+
+.cta-button {
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bttn {
+  width: 160px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  position: relative;
 }

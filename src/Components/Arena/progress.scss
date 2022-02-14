@@ -1,0 +1,153 @@
+body {
+  background: #e5e5e5;
+  color: #555;
+  font-family: open sans;
+}
+
+// mixin definition for bar-wrapper, actual dynamic bar and text
+@mixin bar($bar-color: #5bb75b) {
+  // actual dynamic bar
+  .bar-meter {
+    background-image: linear-gradient(
+      lighten($bar-color, 7),
+      lighten($bar-color, 7)
+    );
+    border-radius: 5px 0 0 5px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+    border: solid 1px rgba(0, 0, 0, 0.35);
+    border-right: solid 1px rgba(0, 0, 0, 0.45);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.45);
+    display: block;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+  // stripes on dynamic bar
+  .bar-meter:before {
+    background-image: linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 2%,
+      transparent 2%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.2) 52%,
+      transparent 52%,
+      transparent
+    );
+    background-size: 16px 16px;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 3;
+  }
+}
+
+// individual bars
+.bar-1 {
+  @include bar(#5bb75b);
+  border-radius: 5px;
+  position: relative;
+  bottom: 15px;
+  background: #ccc;
+  border: solid 1px #999;
+  height: 25px;
+  box-shadow: inset 0 0 2px 0 rgb(0 0 0 / 20%);
+  cursor: pointer;
+  text-shadow: 1px 1px 1px #333, -1px -1px 1px #333, 1px -1px 1px #333,
+    -1px 1px 1px #333, 1px 1px 2px #333, 1px 2px 2px #333;
+  font-family: verdana;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.7;
+
+  .health-text {
+    margin: 0 auto;
+  }
+}
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: 120px;
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.logo {
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.circle {
+  fill: #fff;
+}
+
+.swords {
+  fill: #111;
+}
+
+.path {
+  stroke: #73bb00;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.6s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
