@@ -12,6 +12,11 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.info-header {
+  width: 500px;
+  color: #fff;
+  margin: 0 auto;
+}
 
 .header-container {
   padding-top: 30px;
@@ -38,7 +43,7 @@
   text-overflow: ellipsis;
   position: absolute;
   right: 40px;
-  top: 5%;
+  top: 15%;
   background: #ebebebf2;
   padding: 8px 20px;
   border-radius: 5px;
@@ -74,6 +79,7 @@
   font-size: 16px;
   font-weight: bold;
   color: white;
+  margin: 25px auto;
 }
 
 .connect-wallet-container {

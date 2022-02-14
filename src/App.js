@@ -22,12 +22,22 @@ const App = () => {
 
   // Render Methods
   const renderNotConnectedContainer = () => (
-    <button
-      className="cta-button connect-wallet-button"
-      onClick={connectWallet}
-    >
-      Connect Wallet To Get Started
-    </button>
+    <>
+      <div className="info-header">
+        <p>
+          This is your only chance to save the world against the might{" "}
+          <i>Dragon Pepe</i>. You need to battle him in a CvP mode and reduce
+          his HP to 0. If you can't fight alone, join other players on the
+          server (next update), form a guild and slay the dragon.
+        </p>
+      </div>
+      <button
+        className="cta-button connect-wallet-button"
+        onClick={connectWallet}
+      >
+        Connect Wallet To Get Started
+      </button>
+    </>
   );
 
   // checks wallet on first load
@@ -131,8 +141,10 @@ const App = () => {
         <div className="header-container">
           <p className="header gradient-text">🏹 PepeVerse Slayers 🏹</p>
           {renderContent()}
-          <div className="accounts">
-            {wrongChain.value ? wrongChain.msg : currentAccount}
+          <div className="accounts" style={currentAccount ? { top: "7%" } : {}}>
+            {currentAccount && wrongChain.value
+              ? wrongChain.msg
+              : currentAccount || "0x0000000000000000000000000000000000000000"}
           </div>
         </div>
         <div className="footer-container">
