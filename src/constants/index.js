@@ -1,4 +1,4 @@
-const RINKEBY_CONTRACT_ADDRESS = process.env.REACT_APP_RINKEBY_CONTRACT_ADDRESS;
+const GOERLI_CONTRACT_ADDRESS = process.env.REACT_APP_GOERLI_CONTRACT_ADDRESS;
 
 const transformCharacterData = (characterData, TEST) => {
   return {
@@ -12,4 +12,4 @@ const transformCharacterData = (characterData, TEST) => {
   };
 };
 
-export { RINKEBY_CONTRACT_ADDRESS, transformCharacterData };
+export { GOERLI_CONTRACT_ADDRESS, transformCharacterData };
