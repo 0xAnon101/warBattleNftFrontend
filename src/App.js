@@ -87,7 +87,7 @@ const App = () => {
   const checkChain = async () => {
     const { ethereum } = window;
     let chainId = await ethereum.request({ method: "eth_chainId" });
-    const rinkebyChainId = "0x4"; // for rinkeby
+    const rinkebyChainId = "0x5"; // for goerli
     if (chainId !== rinkebyChainId) {
       setWrongChain({ value: true, msg: "Wrong Network!" });
     } else {
