@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import SelectCharacter from "./Components/SelectCharacter";
 import Arena from "./Components/Arena";
 import GodOfWarNFT from "./utils/GodOfWarBattle.json";
-import { RINKEBY_CONTRACT_ADDRESS } from "./constants";
+import { GOERLI_CONTRACT_ADDRESS } from "./constants";
 import "./styles/App.css";
 
 // Constants
@@ -101,7 +101,7 @@ const App = () => {
     const signer = await provider.getSigner();
     console.log(provider, signer);
     const contractInstance = new ethers.Contract(
-      RINKEBY_CONTRACT_ADDRESS,
+      GOERLI_CONTRACT_ADDRESS,
       GodOfWarNFT.abi,
       signer
     );
